@@ -8,4 +8,6 @@ const http = require("http");
 
 http.createServer( function(request, response){
     console.log("Hola desde el servidor");
+    //necesitamos responder a las solicitudes para obtener algo
+    response.end("Llego la solicitud")
 }).listen(2025);
