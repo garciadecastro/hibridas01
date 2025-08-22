@@ -1,9 +1,18 @@
 const http = require("http")
 
 const server = http.createServer(function(request, response){
-    console.log("Route que me envió el cliente: ", request.url);
-  response.end("Puedo enviar un mensaje, pero no usar tildes á é í ó ú");
-})
+  switch (request.url) {
+    case "/":
+      response.end("Hola bienvenido");
+      break;
+    case "/usuarios":
+      response.end("Listado usuarios");
+      break;
+    default:
+      response.end("No se encontro la ruta");
+      break;
+  }
+});
 
 server.listen(2025, () => {
   console.log("¡Funcionando!...") 
