@@ -3,7 +3,10 @@ const http = require("http")
 const server = http.createServer(function(request, response){
   switch (request.url) {
     case "/":
-      response.end("Hola bienvenido");
+        response.write("Hola bienvenido\n");
+        response.write("Esta es la segunda linea\n");
+        response.write("Esta es la tercera linea\n");
+        response.end("Hemos terminado");
       break;
     case "/usuarios":
       response.end("Listado usuarios");
