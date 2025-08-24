@@ -40,17 +40,75 @@ const profesores = [
 
 ];
 
+const productos = [
+    { 
+        id: 1, 
+        nombre: "Café Expreso", 
+        precio: 200 
+    },
+    
+    { 
+        id: 2, 
+        nombre: "Café Americano", 
+        precio: 250 
+    },
+    
+    { 
+        id: 3, 
+        nombre: "Café Cortado", 
+        precio: 200 
+    },
+    
+    { 
+        id: 4, 
+        nombre: "Café Doble", 
+        precio: 250 
+    },
+    
+    { 
+        id: 5, 
+        nombre: "Café Lagrima", 
+        precio: 200 
+    }
+];
+
 const server = http.createServer(function(request, response){
   switch (request.url) {
     case "/":
             response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-            response.write("Hola bienvenido<br>");
-            response.write("Este es nuestro listado de materias<br>");
-            response.write("Y también tenemos la lista de profesores<br>");
-            response.end("Eso es todo");
+            response.write(`
+        <html>
+        <head>
+            <title>Página de inicio</title>
+            <style>
+            body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+            h1 { color: #333; }
+            table { border-collapse: collapse; width: 50%; margin-top: 20px; }
+            th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+            th { background: #eee; }
+            </style>
+        </head>
+            <body>
+            
+            <h1>Mi espectacular página web!</h1>
+            <h2>Bienvenidos y bien venidas.</h2>
+            <p>Nuestro contenido:</p>
+            
+            <ul>
+                <li><a href="http://localhost:2023/materias">Nuestras materias</a></li>
+                <li><a href="http://localhost:2023/profesore">Nuestros profesores</a></li>
+                <li><a href="http://localhost:2023/productos">Nuestros Cafés</a></li>
+                <li><a href="http://localhost:2023">Home</a></li>
+            </ul> 
+            
+         </body>
+        </html>
+        `);
+
+        response.end();
     break;
     
-     case "/materia":
+     case "/materias":
             response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
             response.write(`
         <html>
@@ -65,7 +123,16 @@ const server = http.createServer(function(request, response){
             </style>
         </head>
         <body>
-            <h1>Mis materias</h1>
+            <h1>Mi espectacular página web!</h1>
+            <h2>Esta es nuestra oferta de materias.</h2>
+            <p>Nuestro contenido:</p>
+            
+            <ul>
+                <li><a href="http://localhost:2023/materias">Nuestras materias</a></li>
+                <li><a href="http://localhost:2023/profesores">Nuestros profesores</a></li>
+                <li><a href="http://localhost:2023/productos">Nuestros Cafés</a></li>
+                <li><a href="http://localhost:2023">Home</a></li>
+            </ul> 
             <table>
             <tr>
                 <th>id</th>
@@ -94,7 +161,7 @@ const server = http.createServer(function(request, response){
         response.end();
     break;
 
-    case "/profesor":
+    case "/profesores":
             response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
             response.write(`
         <html>
@@ -109,7 +176,16 @@ const server = http.createServer(function(request, response){
             </style>
         </head>
         <body>
-            <h1>Mis materias</h1>
+            <h1>Mi espectacular página web!</h1>
+            <h2>Estos son nuestros profesores.</h2>
+            <p>Nuestro contenido:</p>
+            
+            <ul>
+                <li><a href="http://localhost:2023/materias">Nuestras materias</a></li>
+                <li><a href="http://localhost:2023/profesores">Nuestros profesores</a></li>
+                <li><a href="http://localhost:2023/productos">Nuestros Cafés</a></li>
+                <li><a href="http://localhost:2023">Home</a></li>
+            </ul> 
             <table>
             <tr>
                 <th>id</th>
@@ -131,6 +207,59 @@ const server = http.createServer(function(request, response){
         response.write(`
                 </table>
                 <p>Listado de profesores</p>
+            </body>
+            </html>
+        `);
+
+        response.end();
+    break;
+
+    case "/productos":
+            response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            response.write(`
+        <html>
+        <head>
+            <title>Mis productos</title>
+            <style>
+            body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+            h1 { color: #333; }
+            table { border-collapse: collapse; width: 50%; margin-top: 20px; }
+            th, td { border: 1px solid #999; padding: 8px; text-align: left; }
+            th { background: #eee; }
+            </style>
+        </head>
+        <body>
+            <h1>Mi espectacular página web!</h1>
+            <h2>Estos son nuestros cafés.</h2>
+            <p>Nuestro contenido:</p>
+            
+            <ul>
+                <li><a href="http://localhost:2023/materias">Nuestras materias</a></li>
+                <li><a href="http://localhost:2023/profesores">Nuestros profesores</a></li>
+                <li><a href="http://localhost:2023/productos">Nuestros Cafés</a></li>
+                <li><a href="http://localhost:2023">Home</a></li>
+            </ul>  
+            <table>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>precio</th>
+            </tr>
+    `);
+
+        productos.forEach(producto => {
+            response.write(`
+            <tr>
+                <td>${producto.id}</td>
+                <td>${producto.nombre}</td>
+                <td>${producto.precio}</td>
+            </tr>
+            `);
+        });
+
+        response.write(`
+                </table>
+                <p>Listado de cafés</p>
             </body>
             </html>
         `);
