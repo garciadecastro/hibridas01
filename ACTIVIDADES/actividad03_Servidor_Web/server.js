@@ -106,6 +106,7 @@ const server = http.createServer(function(request, response){
         `);
 
         response.end();
+
     break;
     
      case "/materias":
