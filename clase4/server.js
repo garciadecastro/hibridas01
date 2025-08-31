@@ -11,10 +11,14 @@
 //Express es un framework, aunque se instala como una dependencia
 
 import express from "express";
+import { readFile } from "fs";
+
 
 //app es una instancia de la clase Express
 const app = express();
 
+
+//--------- MIDDELWARE -------- --------- MIDDELWARE -------- --------- MIDDELWARE -------- 
 //Los middleware sonfunciones que se ejecutan antes de que la solicitud llegue a una ruta
 // Middleware para parsear datos del formulario
 app.use(express.urlencoded({"extended": true}));
@@ -23,6 +27,9 @@ app.use(express.urlencoded({"extended": true}));
 //De esta forma ya manejamos JSON
 app.use( express.json() );
 
+//crea un middleware especial que sirve archivos estáticos (imágenes, CSS, JS, HTML, etc.) desde la carpeta public
+app.use ("/home", express.static("public"));
+//--------- MIDDELWARE -------- --------- MIDDELWARE -------- --------- MIDDELWARE -------- 
 
 //Con esta función enviamos información por la URL
 
@@ -34,10 +41,22 @@ app.use( express.json() );
     });
 
 //GET con parámetros
+
+app.get("/home", (req, res) => {
+  readFile("public/index.html", function (err, data) {
+    if (err) console.error("No se encontro el archivo o no tiene permisos");
+    res.write(data);
+    res.end();
+  });
+});
+
 app.get("/:nombre", (req, res) => {
   console.log("Hola, estoy usando parámetros", req.params);
   res.send("¡Recibido intento con paraámetros!");
 });
+
+
+
 
 //POST Es una función de Express que define una ruta POST, 
 // es decir, una ruta que responde a solicitudes HTTP de tipo POST.

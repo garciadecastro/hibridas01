@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Bienvenida</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    /* Navbar */
+    nav {
+      background: #222;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav h1 {
+      color: #fff;
+      font-size: 1.2em;
+      margin: 0;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #4CAF50;
+    }
+
+    header, section {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    header h1 {
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 60%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+    }
+    section {
+      background: #fff;
+      margin: 20px auto;
+      max-width: 900px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 20px;
+    }
+    section h2 {
+      color: #444;
+      margin-bottom: 15px;
+    }
+    section p {
+      font-size: 1.1em;
+      color: #555;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <h1>IA Solutions</h1>
+    <ul>
+      <li><a href="/home">Inicio</a></li>
+      <li><a href="/contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Bienvenida -->
+  <header>
+    <h1>¡Bienvenido a nuestra empresa!</h1>
+    <img src="img/home.jpg" alt="Hombre y robot interactuando">
+  </header>
+
+  <!-- Quiénes somos -->
+  <section>
+    <h2>¿Quiénes somos?</h2>
+    <p>
+      Somos <b>IA Solutions</b>, una empresa innovadora dedicada al desarrollo de 
+      soluciones de inteligencia artificial que transforman la manera en que las 
+      personas y las organizaciones trabajan, aprenden e interactúan.
+    </p>
+    <p>
+      Nuestro equipo multidisciplinario combina ciencia de datos, ingeniería de software 
+      y visión estratégica para crear productos inteligentes que resuelven problemas reales.  
+      Desde chatbots educativos hasta plataformas de análisis predictivo, nuestra misión es 
+      poner la IA al servicio de la sociedad.
+    </p>
+    <p>
+      Creemos en un futuro donde humanos y máquinas colaboren de forma ética, transparente 
+      y sostenible. 🌍🤖
+    </p>
+  </section>
+</body>
+</html>
