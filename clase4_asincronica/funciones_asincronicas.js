@@ -9,6 +9,20 @@ function esperarTiempo (ms, mensaje){
     })
 }
 
+//ASINCRONÍA CON PROMESA Y CATCH
+function esperarTiempoConCatch(error = false) {
+    return new Promise((resolve, reject) => {
+        if (error) {
+            reject("Soy la promesa con Catch: Algo salió mal");
+        } else {
+            resolve("Soy la promesa con Catch: Todo salió bien");
+        }
+    });
+}
+
+
+//FUNCIONES SINCRÓNICAS, LAS NORMALES
+
 function A () {
     console.log("Soy la función A, terminé");
 }
@@ -21,7 +35,30 @@ function C () {
     console.log("Soy la función C, terminé");
 }
 
-esperarTiempo(2000, "Soy argentina, y llego tarde").then( (valor) => console.log(valor));
+//ejecutando las funciones
+esperarTiempoConCatch()
+  .then(mensaje => console.log(mensaje))
+
+  .catch(error => console.error(error));
+esperarTiempo(2000, "Soy la promesa argentina, y llego tarde").then( (valor) => console.log(valor));
+
+esperarTiempoConCatch()
+  .then((mensaje) => esperarTiempo(1000, mensaje))
+  .then((resultado) => console.log(resultado))
+  .catch((error) => console.error(error));
+
+
 A();
 B();
 C();
+
+//async y await son bloqueantes, los usamos dentro de funciones por ese motivo
+
+esperarTiempoConCatch()
+  .then(async (mensaje) => {
+    A();
+    const resultado = await esperarTiempo(1000, mensaje);
+    console.log(resultado);
+    C();
+  })
+  .catch((error) => console.error(error));
