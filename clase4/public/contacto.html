@@ -20,18 +20,19 @@
   <main>
     <section class="formulario-container">
       <h2>Formulario de Contacto</h2>
-      <form>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+        <form method="POST" action="/">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
 
-        <label for="correo">Correo Electrónico:</label>
-        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com">
 
-        <label for="mensaje">Mensaje:</label>
-        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí"></textarea>
 
-        <button type="submit">Enviar</button>
-      </form>
+            <button type="submit">Enviar</button>
+        </form>
+
     </section>
   </main>
 
