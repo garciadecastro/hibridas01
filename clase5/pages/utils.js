@@ -8,7 +8,7 @@ export function createPage (titulo, contenido) {
 
     html += '</head><body>';
 
-    html += '<h1>Juegos de Rol</h1>';
+    html += `<h1>${titulo}</h1>`;
 
     html += contenido;
 
