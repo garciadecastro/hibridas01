@@ -39,9 +39,9 @@ app.get("/", (req, res) => {                       // Define una ruta GET en "/"
       });                                           // Fin del bucle forEach
       
       html += "</ul>";                             // Cierra la lista HTML
-      res.send(html);                              // Envía el HTML como respuesta al cliente
+      res.send(createPage("Listado de Juegos", html));                              // Envía el HTML como respuesta al cliente
     })
 })     
 
 //Esta función levanta el servidor y lo pone a escuchar peticiones HTTP en un puerto específico (ej: 3000).
-app.listen(12305, ()=> console.log("Funcionando en puerto extraño."));
+app.listen(12305, ()=> console.log("Funcionando en puerto extraño: 12305."));
