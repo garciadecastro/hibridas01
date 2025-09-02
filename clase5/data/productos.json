@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "nombre": "HeroQuest",
+    "editorial": "Milton Bradley / Games Workshop",
+    "year": 1989
+  },
+  {
+    "id": 2,
+    "nombre": "Dungeons & Dragons (Basic Set)",
+    "editorial": "TSR",
+    "year": 1977
+  },
+  {
+    "id": 3,
+    "nombre": "Advanced Dungeons & Dragons",
+    "editorial": "TSR",
+    "year": 1977
+  },
+  {
+    "id": 4,
+    "nombre": "RuneQuest",
+    "editorial": "Chaosium",
+    "year": 1978
+  },
+  {
+    "id": 5,
+    "nombre": "Call of Cthulhu",
+    "editorial": "Chaosium",
+    "year": 1981
+  },
+  {
+    "id": 6,
+    "nombre": "Warhammer Fantasy Roleplay",
+    "editorial": "Games Workshop",
+    "year": 1986
+  },
+  {
+    "id": 7,
+    "nombre": "Middle-earth Role Playing (MERP)",
+    "editorial": "Iron Crown Enterprises",
+    "year": 1984
+  },
+  {
+    "id": 8,
+    "nombre": "Paranoia",
+    "editorial": "West End Games",
+    "year": 1984
+  },
+  {
+    "id": 9,
+    "nombre": "GURPS",
+    "editorial": "Steve Jackson Games",
+    "year": 1986
+  },
+  {
+    "id": 10,
+    "nombre": "Traveller",
+    "editorial": "Game Designers' Workshop",
+    "year": 1977
+  },
+  {
+    "id": 11,
+    "nombre": "Tunnels & Trolls",
+    "editorial": "Flying Buffalo",
+    "year": 1975
+  },
+  {
+    "id": 12,
+    "nombre": "Pendragon",
+    "editorial": "Chaosium",
+    "year": 1985
+  },
+  {
+    "id": 13,
+    "nombre": "Star Wars RPG",
+    "editorial": "West End Games",
+    "year": 1987
+  },
+  {
+    "id": 14,
+    "nombre": "Shadowrun",
+    "editorial": "FASA Corporation",
+    "year": 1989
+  },
+  {
+    "id": 15,
+    "nombre": "Cyberpunk 2020",
+    "editorial": "R. Talsorian Games",
+    "year": 1988
+  },
+  {
+    "id": 16,
+    "nombre": "DragonQuest",
+    "editorial": "SPI / TSR",
+    "year": 1980
+  },
+  {
+    "id": 17,
+    "nombre": "Stormbringer",
+    "editorial": "Chaosium",
+    "year": 1981
+  },
+  {
+    "id": 18,
+    "nombre": "Ars Magica",
+    "editorial": "Lion Rampant",
+    "year": 1987
+  },
+  {
+    "id": 19,
+    "nombre": "Rolemaster",
+    "editorial": "Iron Crown Enterprises",
+    "year": 1980
+  },
+  {
+    "id": 20,
+    "nombre": "Gamma World",
+    "editorial": "TSR",
+    "year": 1978
+  }
+]
