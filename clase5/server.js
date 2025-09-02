@@ -24,13 +24,16 @@ const app = express();
    - Body → req.body (datos enviados en POST/PUT en formato JSON o form-data)
 -------------------------------------------------------------------*/
 
-// Ruta principal: devuelve un listado de productos
-app.get("/", (req, res) => {                       // Define una ruta GET en "/" que recibe request y response
-  readFile("./data/juegos.json", "utf-8")       // Lee el archivo productos.json como texto UTF-8
-    .then((data) => JSON.parse(data))              // Convierte el contenido leído a objeto/array con JSON.parse
-    .catch(err => [])                              // Si hay error al leer, devuelve un array vacío
-    .then((juegos) => {                         // Recibe los productos (array del JSON ya parseado)
-      let html = "<ul>";                           // Inicializa un string HTML con una lista desordenada
+//SEPARACIÓN DE FUNCIONES
+async function getJuegos () {
+  return readFile("./data/juegos.json", "utf-8")       // Lee el archivo productos.json como texto UTF-8
+  .then((data) => JSON.parse(data))              // Convierte el contenido leído a objeto/array con JSON.parse
+  .catch(err => [])                              // Si hay error al leer, devuelve un array vacío
+}
+
+//Listar nuestros juegos
+function crearListaDeJuegos (juegos) {
+  let html = "<ul>";                           // Inicializa un string HTML con una lista desordenada
       juegos.forEach(juego => {                            // Recorre cada producto
           html += `<li>                                          
                       <strong>ID:</strong> ${juego.id}
@@ -43,48 +46,66 @@ app.get("/", (req, res) => {                       // Define una ruta GET en "/"
                     </li>`;                                      // Agrega todos los campos
       });                                           // Fin del bucle forEach
       
-      html += "</ul>";                             // Cierra la lista HTML
-      res.send(createPage("Listado de Juegos", html));                              // Envía el HTML como respuesta al cliente
+      html += "</ul>";    
+
+      return html;
+
+}
+
+//Filtrar los productos por id
+async function getJuegosbyId (id) {
+  return getJuegos ()
+  .then ((juegos) => {
+    let juego;
+    for (let i = 0 ; i < juegos.length ; i++) {
+      if (juegos[i].id == id) {
+            juego = juegos[i]
+          }
+
+    }
+    return juego;
+  });
+  
+}
+
+// Ruta principal: devuelve un listado de productos
+app.get("/", (req, res) => {                       // Define una ruta GET en "/" que recibe request y response
+  readFile("./data/juegos.json", "utf-8")       // Lee el archivo productos.json como texto UTF-8
+    getJuegos()                                 // Se llama a la función que ya trae todos los juegos en un objeto.
+    .then((juegos) => {                         // Recibe los productos (array del JSON ya parseado)
+     res.send(createPage("Listado de Juegos", crearListaDeJuegos (juegos)));                              // Envía el HTML como respuesta al cliente
     })
 })     
 
 // Ruta con parámetro dinámico :id → devuelve un producto específico por ID
 app.get("/:id", (req, res) => {          // Define una ruta GET con un parámetro dinámico ":id"
   const id = req.params.id;              // Extrae el valor del parámetro "id" de la URL
-  readFile("./data/juegos.json", "utf-8")
-  .then((data) => JSON.parse(data))              
-  .catch(err => []) 
-  //Filtro de id en un array
-  .then((juegos) => {
-    let juego;
-      for (let i = 0 ; i < juegos.length ; i++){
-          if (juegos[i].id == id) {
-            juego = juegos[i]
-          }
-      }
-      let html = "";
+  
+  getJuegosbyId (id)
+  .then(juego =>{
+    let html = "";
 
-      if (juego) { // Caso de que exista el juego
-                
-        html += "<ul>"
-        html += `<li>Nombre: ${juego.nombre} </li>`
-        html += `<li>Editorial: ${juego.editorial} </li>`
-        html += `<li>Año: ${juego.year} </li>`
-        html += "</ul>"
-        html += `<a href="/">Volver</a>`
+        if (juego) { // Caso de que exista el juego
+                  
+          html += "<ul>"
+          html += `<li>Nombre: ${juego.nombre} </li>`
+          html += `<li>Editorial: ${juego.editorial} </li>`
+          html += `<li>Año: ${juego.year} </li>`
+          html += "</ul>"
+          html += `<a href="/">Volver</a>`
 
-        res.send(createPage("Detalles de juego", html)); 
+          res.send(createPage("Detalles de juego", html)); 
 
-      } else {
-        html += `<h2>No se encontró ningún juego con esa 'id' </h2>`
-        html += `<a href="/">Volver</a>`
-        res.send(createPage("404", html)); 
-      }
-       
+        } else {
+          html += `<h2>No se encontró ningún juego con esa 'id' </h2>`
+          html += `<a href="/">Volver</a>`
+          res.send(createPage("404", html)); 
+        }
+  })     
                                           
-    });  
+});  
 
-})
+
 
 
 //Esta función levanta el servidor y lo pone a escuchar peticiones HTTP en un puerto específico (ej: 3000).
