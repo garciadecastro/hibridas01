@@ -9,7 +9,7 @@ export async function getJuegos () {
 }
 
 //Filtrar los productos por id
-export async function getJuegosbyId (id) {
+export async function getJuegoById (id) {
   return getJuegos ()
   .then ((juegos) => {
     let juego;
