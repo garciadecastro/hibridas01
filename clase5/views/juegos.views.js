@@ -29,7 +29,7 @@ export function createDetailPage(juego) {
   html += `<li>Editorial: ${juego.editorial}</li>`;
   html += `<li>Año: ${juego.year}</li>`;
   html += "</ul>";
-  html += `<a href="/">Volver</a>`;
+  html += `<a href="/juegos">Volver</a>`;
   return createPage(juego.nombre, html);
 }
 
