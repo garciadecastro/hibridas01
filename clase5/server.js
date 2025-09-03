@@ -2,9 +2,11 @@
 //sintaxis ES Modules (ESM) (import) en lugar de require().
 import express from "express";
 import { readFile } from "node:fs/promises";
+import { getJuegos, getJuegosbyId } from "./service/juegos.service.js"; // Esta línea importa las funciones getJuegos y getJuegosbyId desde el archivo juegos.service.js ubicado en la carpeta service. Estas funciones se utilizan para obtener datos relacionados con los juegos desde un archivo JSON.
 
-import { createPage } from "./pages/utils.js"; //no olvidla extensión .js en la ruta
-
+import { createPage, createJuegosListPage, createDetailPage, errorPage } from "./views/juegos.views.js"; 
+// Crear una aplicación de Express
+// La función express() es el núcleo de una aplicación Express.
 // La llamada express() devuelve una aplicación de Express, que es un objeto que representa tu servidor.
 // app es la instancia donde vas a:
 // Definir rutas (app.get(), app.post(), etc.).
@@ -24,12 +26,7 @@ const app = express();
    - Body → req.body (datos enviados en POST/PUT en formato JSON o form-data)
 -------------------------------------------------------------------*/
 
-//SEPARACIÓN DE FUNCIONES
-async function getJuegos () {
-  return readFile("./data/juegos.json", "utf-8")       // Lee el archivo productos.json como texto UTF-8
-  .then((data) => JSON.parse(data))              // Convierte el contenido leído a objeto/array con JSON.parse
-  .catch(err => [])                              // Si hay error al leer, devuelve un array vacío
-}
+
 
 //Listar nuestros juegos
 function crearListaDeJuegos (juegos) {
@@ -52,21 +49,7 @@ function crearListaDeJuegos (juegos) {
 
 }
 
-//Filtrar los productos por id
-async function getJuegosbyId (id) {
-  return getJuegos ()
-  .then ((juegos) => {
-    let juego;
-    for (let i = 0 ; i < juegos.length ; i++) {
-      if (juegos[i].id == id) {
-            juego = juegos[i]
-          }
 
-    }
-    return juego;
-  });
-  
-}
 
 // Ruta principal: devuelve un listado de productos
 app.get("/", (req, res) => {                       // Define una ruta GET en "/" que recibe request y response
@@ -86,20 +69,10 @@ app.get("/:id", (req, res) => {          // Define una ruta GET con un parámetr
     let html = "";
 
         if (juego) { // Caso de que exista el juego
-                  
-          html += "<ul>"
-          html += `<li>Nombre: ${juego.nombre} </li>`
-          html += `<li>Editorial: ${juego.editorial} </li>`
-          html += `<li>Año: ${juego.year} </li>`
-          html += "</ul>"
-          html += `<a href="/">Volver</a>`
-
-          res.send(createPage("Detalles de juego", html)); 
+           res.send(createDetailPage(juego)); 
 
         } else {
-          html += `<h2>No se encontró ningún juego con esa 'id' </h2>`
-          html += `<a href="/">Volver</a>`
-          res.send(createPage("404", html)); 
+            res.send(errorPage()); 
         }
   })     
                                           
