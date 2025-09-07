@@ -22,3 +22,11 @@ export async function getJuegoById (id) {
     return juego;
   });  
 }
+
+// Filtrar los productos por categoría
+export async function getJuegosBySection(categoria) {
+  return getJuegos()
+    .then((juegos) => {
+      return juegos.filter((j) => j.categoria === categoria);
+    });
+}

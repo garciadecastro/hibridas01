@@ -1,16 +1,4 @@
-//Funciones para contenido de la página
-export function createPage(titulo, contenido) {
-  let html = "";
-  html +=
-    '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
-  html += "<title>" + titulo + "</title>";
-  html += "</head><body>";
-  html += `<h1>${titulo}</h1>`;
-  html += contenido;
-  html += "</body></html>";
-
-  return html;
-}
+import { createPage } from "../utils/page.js";
 
 export function createJuegosListPage(juegos) {
   let html = "<ul>";
@@ -19,7 +7,10 @@ export function createJuegosListPage(juegos) {
   });
   html += "</ul>";
 
-  return createPage("Juegos", html);
+  // Enlace para volver al menú principal
+  html += `<a href="/">Volver al menú principal</a>`;
+
+  return createPage("Catálogo de Juegos", html);
 }
 
 export function createDetailPage(juego) {

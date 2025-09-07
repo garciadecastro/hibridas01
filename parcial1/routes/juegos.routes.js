@@ -6,6 +6,10 @@ const route = express.Router();
 
 // Ruta principal: devuelve un listado de productos
 route.get("/juegos", controller.getJuegos);
+//Ruta para juego individual
 route.get("/juegos/:id", controller.getJuegoById);
+// Rurta para filtrar por categoría
+route.get("/seccion/:categoria", controller.getJuegosByCategoria);
+
 
 export default route;
