@@ -2,11 +2,25 @@ import { readFile, writeFile } from "node:fs/promises"; // Importa la función r
 
 //FUNCIONES con los datos para exportar
 //Traer todos los productos
-export async function getJuegos () {
-  return readFile("./data/juegos.json", "utf-8")       // Lee el archivo productos.json como texto UTF-8
-  .then((data) => JSON.parse(data))              // Convierte el contenido leído a objeto/array con JSON.parse
-  .catch(err => [])                              // Si hay error al leer, devuelve un array vacío
+export async function getJuegos() {
+  return readFile("./data/juegos.json", "utf-8")
+    .then(data => {
+      const juegos = JSON.parse(data);
+      // Solo devuelvo los que no tienen eliminado: true
+      return juegos.filter(j => !j.eliminado);
+    })
+    .catch(err => []);
 }
+
+
+// Trae TODOS los juegos, incluso eliminados. La necesitamos para no perder los juegos eliminados.
+//Quizás vuelvan al catálogo en el futuro y necesitamos además mantener la integridad de las id
+async function getAllJuegos() {
+  return readFile("./data/juegos.json", "utf-8")
+    .then(data => JSON.parse(data))
+    .catch(err => []);
+}
+
 
 //Filtrar los productos por id
 export async function getJuegoById (id) {
@@ -30,52 +44,50 @@ export async function getJuegosBySection(categoria) {
       return juegos.filter((j) => j.categoria === categoria);
     });
 }
+
+
 // Guardar un nuevo juego en juegos.json
 export function guardarJuego(juego){
-  return getJuegos().then( async juegos => {
+  return getAllJuegos().then( async juegos => {
+    // Para que no se den casos de Id repetida busco el id más alto y le sumo 1
+    const idMax = juegos.length > 0 ? Math.max(...juegos.map(j => j.id)) : 0;
+
     const nuevoJuego = {
-      id: juegos.length + 1,
+      id: idMax + 1, // los id no se repetirán aunque borre juegos
       ...juego
-    }
+    };
 
     juegos.push(nuevoJuego)
-    await writeFile( "./data/juegos.json", JSON.stringify(juegos) )
+    // Acá uso JSON.stringify con null, 2 → eso significa que el archivo se guarda con espacios e indentado
+    // Así se leerá mejor
+    await writeFile("./data/juegos.json", JSON.stringify(juegos, null, 2));
     return nuevoJuego
   });
 }
 
 //Editar Juego
 //export function editarJuego(id, juego){
-export function editarJuego(id, juego) {
-  return getJuegos().then(async juegos => {
+
+export function editarJuego(juego) {
+  return getAllJuegos().then(async juegos => {
     console.log("juego editado", juego)
-    const juegoEditado = {
-      id: id,
-      ... juego
-    }
-    const nuevoListado = juegos.filter( j => j.id != id )
-    nuevoListado.push(juegoEditado)
-    console.log("Nuevo listado", juegos)
-    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado))
-    console.log("Nuevo juego devuelto", juegoEditado)
-    return juegoEditado
-  })
+    const nuevoListado = juegos.map(j => j.id == juego.id ? juego : j);
+
+    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado, null, 2));
+    return juego;
+  });
 }
 
 
 //Borrar Juego
-export function borrarJuego(id){
-  return getJuegos().then( async (juegos) => {
+export function borrarJuego(id) {
+  return getJuegos().then(async juegos => {
+    // Marco como eliminado
+    const nuevoListado = juegos.map(j =>
+      j.id == id ? { ...j, eliminado: true } : j
+    );
 
-    const nuevoListado = juegos.map( j => {
-      if( j.id == id ){
-        j.eliminado = true
-      }
-      return j
-    } )
-
-    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado))
-
-    return id
+    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado, null, 2));
+    return id;
   });
 }

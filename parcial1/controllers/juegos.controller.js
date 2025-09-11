@@ -57,11 +57,21 @@ export function formularioEditarJuego(req, res){
     .then( juego => res.send( views.formularioEditarJuego(juego) ) )
 }
 
-export function editarJuego(req, res){
-  const id = req.params.id
-  const juego = req.body
-  return service.editarJuego(id, juego)
-    .then( juego => res.send( views.createDetailPage(juego) ) )
+export function editarJuego(req, res) {
+  
+  const juego = {
+    id: Number(req.params.id),
+    nombre: req.body.nombre,
+    editorial: req.body.editorial,
+    precio: req.body.precio,
+    year: req.body.year,
+    categoria: req.body.categoria
+  }
+
+  service.editarJuego(juego)
+    .then(juegoEditado => 
+      res.send( views.createDetailPage(juegoEditado) )
+    )
 }
 
 

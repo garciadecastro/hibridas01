@@ -1,1 +1,203 @@
-[{"id":2,"nombre":"Dungeons & Dragons (Basic Set)","editorial":"TSR","precio":50000,"year":1977,"categoria":"clásicos"},{"id":4,"nombre":"RuneQuest","editorial":"Chaosium","precio":50000,"year":1978,"categoria":"fantasía"},{"id":5,"nombre":"Call of Cthulhu","editorial":"Chaosium","precio":50000,"year":1981,"categoria":"terror"},{"id":6,"nombre":"Warhammer Fantasy Roleplay","editorial":"Games Workshop","precio":50000,"year":1986,"categoria":"fantasía"},{"id":7,"nombre":"Middle-earth Role Playing (MERP)","editorial":"Iron Crown Enterprises","precio":50000,"year":1984,"categoria":"fantasía"},{"id":8,"nombre":"Paranoia","editorial":"West End Games","precio":50000,"year":1984,"categoria":"ciencia-ficcion"},{"id":9,"nombre":"GURPS","editorial":"Steve Jackson Games","precio":50000,"year":1986,"categoria":"clásicos"},{"id":10,"nombre":"Traveller","editorial":"Game Designers' Workshop","precio":50000,"year":1977,"categoria":"ciencia-ficcion"},{"id":11,"nombre":"Tunnels & Trolls","editorial":"Flying Buffalo","precio":50000,"year":1975,"categoria":"clásicos"},{"id":12,"nombre":"Pendragon","editorial":"Chaosium","precio":50000,"year":1985,"categoria":"historia-mitos"},{"id":13,"nombre":"Star Wars RPG","editorial":"West End Games","precio":50000,"year":1987,"categoria":"ciencia-ficcion"},{"id":14,"nombre":"Shadowrun","editorial":"FASA Corporation","precio":50000,"year":1989,"categoria":"ciencia-ficcion"},{"id":16,"nombre":"DragonQuest","editorial":"SPI / TSR","precio":50000,"year":1980,"categoria":"fantasía"},{"id":17,"nombre":"Stormbringer","editorial":"Chaosium","precio":50000,"year":1981,"categoria":"fantasía"},{"id":18,"nombre":"Ars Magica","editorial":"Lion Rampant","precio":50000,"year":1987,"categoria":"historia-mitos"},{"id":19,"nombre":"Rolemaster","editorial":"Iron Crown Enterprises","precio":50000,"year":1980,"categoria":"fantasía"},{"id":20,"nombre":"Gamma World","editorial":"TSR","precio":50000,"year":1978,"categoria":"ciencia-ficcion"},{"id":21,"nombre":"Carlos","editorial":"Game","precio":"600000","year":"1987","categoria":"fantasia"},{"id":22,"nombre":"Hero","editorial":"Game","precio":"2222","year":"5555","categoria":"ciencia-ficcion"},{"id":23,"nombre":"Soy un juego nuevo","editorial":"Nuevos","precio":"6000000","year":"2020","categoria":"clasico"},{"nombre":"HeroQuest","editorial":"Milton Bradley / Games Workshop","year":"1889","categoria":"clásicos","precio":"50000"},{"id":"15","nombre":"Cyberpunk 2020","editorial":"R. Talsorian Games","year":"1988","categoria":"ciencia-ficcion","precio":"50000"},{"id":24,"nombre":"Hero","editorial":"gfsdfg","precio":"77777","year":"4567","categoria":"fantasía","eliminado":true},{"id":"3","nombre":"Advanced Dungeons & Dragons","editorial":"TSR","year":"1977","categoria":"clásicos","precio":"50000"},{"id":25,"nombre":"Daniela","editorial":"Banfield","precio":"50000","year":"1984","categoria":"Juego de mesa","eliminado":true}]
+[
+  {
+    "id": 1,
+    "nombre": "Dungeons & Dragons (Basic Set)",
+    "editorial": "TSR",
+    "precio": "50000",
+    "year": "1977",
+    "categoria": "clásicos"
+  },
+  {
+    "id": 2,
+    "nombre": "RuneQuest",
+    "editorial": "Chaosium",
+    "precio": 50000,
+    "year": 1978,
+    "categoria": "fantasía"
+  },
+  {
+    "id": 3,
+    "nombre": "Call of Cthulhu",
+    "editorial": "Chaosium",
+    "precio": 50000,
+    "year": 1981,
+    "categoria": "terror"
+  },
+  {
+    "id": 4,
+    "nombre": "Warhammer Fantasy Roleplay",
+    "editorial": "Games Workshop",
+    "precio": 50000,
+    "year": 1986,
+    "categoria": "fantasía"
+  },
+  {
+    "id": 5,
+    "nombre": "Middle-earth Role Playing (MERP)",
+    "editorial": "Iron Crown Enterprises",
+    "precio": 50000,
+    "year": 1984,
+    "categoria": "fantasía"
+  },
+  {
+    "id": 6,
+    "nombre": "Paranoia",
+    "editorial": "West End Games",
+    "precio": 50000,
+    "year": 1984,
+    "categoria": "ciencia-ficcion"
+  },
+  {
+    "id": 7,
+    "nombre": "GURPS",
+    "editorial": "Steve Jackson Games",
+    "precio": 50000,
+    "year": 1986,
+    "categoria": "clásicos"
+  },
+  {
+    "id": 8,
+    "nombre": "Traveller",
+    "editorial": "Game Designers' Workshop",
+    "precio": 50000,
+    "year": 1977,
+    "categoria": "ciencia-ficcion"
+  },
+  {
+    "id": 9,
+    "nombre": "Tunnels & Trolls",
+    "editorial": "Flying Buffalo",
+    "precio": 50000,
+    "year": 1975,
+    "categoria": "clásicos"
+  },
+  {
+    "id": 10,
+    "nombre": "Pendragon",
+    "editorial": "Chaosium",
+    "precio": 50000,
+    "year": 1985,
+    "categoria": "historia-mitos"
+  },
+  {
+    "id": 11,
+    "nombre": "Star Wars RPG",
+    "editorial": "West End Games",
+    "precio": 50000,
+    "year": 1987,
+    "categoria": "ciencia-ficcion"
+  },
+  {
+    "id": 12,
+    "nombre": "Shadowrun",
+    "editorial": "FASA Corporation",
+    "precio": 50000,
+    "year": 1989,
+    "categoria": "ciencia-ficcion"
+  },
+  {
+    "id": 13,
+    "nombre": "DragonQuest",
+    "editorial": "SPI / TSR",
+    "precio": 50000,
+    "year": 1980,
+    "categoria": "fantasía"
+  },
+  {
+    "id": 14,
+    "nombre": "Stormbringer",
+    "editorial": "Chaosium",
+    "precio": 50000,
+    "year": 1981,
+    "categoria": "fantasía"
+  },
+  {
+    "id": 15,
+    "nombre": "Ars Magica",
+    "editorial": "Lion Rampant",
+    "precio": 50000,
+    "year": 1987,
+    "categoria": "historia-mitos"
+  },
+  {
+    "id": 16,
+    "nombre": "Rolemaster",
+    "editorial": "Iron Crown Enterprises",
+    "precio": 50000,
+    "year": 1980,
+    "categoria": "fantasía"
+  },
+  {
+    "id": 17,
+    "nombre": "Gamma World",
+    "editorial": "TSR",
+    "precio": 50000,
+    "year": 1978,
+    "categoria": "ciencia-ficcion"
+  },
+  {
+    "id": 18,
+    "nombre": "Carlos",
+    "editorial": "Game",
+    "precio": "600000",
+    "year": "1987",
+    "categoria": "fantasia"
+  },
+  {
+    "id": 19,
+    "nombre": "Hero",
+    "editorial": "Game",
+    "precio": "2222",
+    "year": "5555",
+    "categoria": "ciencia-ficcion"
+  },
+  {
+    "id": 20,
+    "nombre": "Soy un juego nuevo",
+    "editorial": "Nuevos",
+    "precio": "6000000",
+    "year": "2020",
+    "categoria": "clasico"
+  },
+  {
+    "id": 21,
+    "nombre": "HeroQuest",
+    "editorial": "Milton Bradley / Games Workshop",
+    "year": "1889",
+    "categoria": "clásicos",
+    "precio": "50000"
+  },
+  {
+    "id": 22,
+    "nombre": "Cyberpunk 2020",
+    "editorial": "R. Talsorian Games",
+    "year": "1988",
+    "categoria": "ciencia-ficcion",
+    "precio": "50000"
+  },
+  {
+    "id": 24,
+    "nombre": "Advanced Dungeons & Dragons",
+    "editorial": "TSR",
+    "year": "1977",
+    "categoria": "clásicos",
+    "precio": "50000"
+  },
+  {
+    "id": 25,
+    "nombre": "con juegos borrados",
+    "editorial": "qué id tengo",
+    "precio": "1000",
+    "year": "11111",
+    "categoria": "duda",
+    "eliminado": true
+  },
+  {
+    "id": 26,
+    "nombre": "¿Y ahora?",
+    "editorial": "asdfasdf",
+    "precio": "33343",
+    "year": "444",
+    "categoria": "gadfgadf"
+  }
+]
