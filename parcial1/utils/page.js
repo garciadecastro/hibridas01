@@ -39,6 +39,19 @@ export function createPage(titulo, navLinks, contenido) {
         ${contenido}
       </main>
 
+     
+      <footer class="bg-gray-800 text-gray-200 py-6 mt-6">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+          <p class="text-sm">&copy; 2025 Tienda de Juegos de Rol. Todos los derechos reservados.</p>
+          <p class="mt-2">
+            <a href="/" class="text-blue-400 hover:underline">Inicio</a> | 
+            <a href="/juegos" class="text-blue-400 hover:underline">Catálogo</a> | 
+            <a href="/juegos/nuevo" class="text-blue-400 hover:underline">Añadir juego</a>
+          </p>
+        </div>
+      </footer>
+      
+
     </body>
     </html>
   `;

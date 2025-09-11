@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises"; // Importa la función readFile del módulo fs/promises para leer archivos de forma asíncrona
+import { readFile, writeFile } from "node:fs/promises"; // Importa la función readFile del módulo fs/promises para leer archivos de forma asíncrona
 
 //FUNCIONES con los datos para exportar
 //Traer todos los productos
@@ -29,4 +29,53 @@ export async function getJuegosBySection(categoria) {
     .then((juegos) => {
       return juegos.filter((j) => j.categoria === categoria);
     });
+}
+// Guardar un nuevo juego en juegos.json
+export function guardarJuego(juego){
+  return getJuegos().then( async juegos => {
+    const nuevoJuego = {
+      id: juegos.length + 1,
+      ...juego
+    }
+
+    juegos.push(nuevoJuego)
+    await writeFile( "./data/juegos.json", JSON.stringify(juegos) )
+    return nuevoJuego
+  });
+}
+
+//Editar Juego
+//export function editarJuego(id, juego){
+export function editarJuego(id, juego) {
+  return getJuegos().then(async juegos => {
+    console.log("juego editado", juego)
+    const juegoEditado = {
+      id: id,
+      ... juego
+    }
+    const nuevoListado = juegos.filter( j => j.id != id )
+    nuevoListado.push(juegoEditado)
+    console.log("Nuevo listado", juegos)
+    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado))
+    console.log("Nuevo juego devuelto", juegoEditado)
+    return juegoEditado
+  })
+}
+
+
+//Borrar Juego
+export function borrarJuego(id){
+  return getJuegos().then( async (juegos) => {
+
+    const nuevoListado = juegos.map( j => {
+      if( j.id == id ){
+        j.eliminado = true
+      }
+      return j
+    } )
+
+    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado))
+
+    return id
+  });
 }

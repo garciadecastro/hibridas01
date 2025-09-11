@@ -30,3 +30,49 @@ export function getJuegosByCategoria(req, res) {
     }
   });
 }
+
+//Introducir juegos nuevos
+export function formularioNuevoJuego(req, res) {
+  res.send(views.formularioNuevoJuego());
+}
+
+export function guardarJuego(req, res){
+  const juego = {
+    nombre: req.body.nombre,
+    editorial: req.body.editorial,
+    precio: req.body.precio,
+    year: req.body.year,
+    categoria: req.body.categoria
+
+  }
+  service.guardarJuego(juego)
+    .then( juegoGuardado => res.send( views.createDetailPage(juegoGuardado) ) )
+    .catch(err => res.send(views.errorPage()) )
+}
+
+//Edición del Juego
+export function formularioEditarJuego(req, res){
+  const id = req.params.id
+  return service.getJuegoById(id)
+    .then( juego => res.send( views.formularioEditarJuego(juego) ) )
+}
+
+export function editarJuego(req, res){
+  const id = req.params.id
+  const juego = req.body
+  return service.editarJuego(id, juego)
+    .then( juego => res.send( views.createDetailPage(juego) ) )
+}
+
+
+export function formularioBorrarJuego(req, res){
+  const id = req.params.id
+  service.getJuegoById(id)
+    .then( (juego) => res.send(views.formularioBorrarJuego(juego)) )
+}
+
+export function borrarJuego(req, res){
+  const id = req.params.id
+  service.borrarJuego(id)
+    .then( (id) => res.send( views.borrarExito(id) ) )
+}
