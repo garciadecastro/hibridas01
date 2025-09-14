@@ -29,7 +29,8 @@
     "editorial": "Games Workshop",
     "precio": 50000,
     "year": 1986,
-    "categoria": "fantasía"
+    "categoria": "fantasía",
+    "eliminado": true
   },
   {
     "id": 5,
@@ -184,20 +185,19 @@
     "precio": "50000"
   },
   {
-    "id": 25,
-    "nombre": "con juegos borrados",
-    "editorial": "qué id tengo",
-    "precio": "1000",
-    "year": "11111",
-    "categoria": "duda",
-    "eliminado": true
-  },
-  {
     "id": 26,
     "nombre": "¿Y ahora?",
     "editorial": "asdfasdf",
     "precio": "33343",
     "year": "444",
     "categoria": "gadfgadf"
+  },
+  {
+    "id": 27,
+    "nombre": "888888",
+    "editorial": "Chaosium",
+    "precio": 50000,
+    "year": 1981345,
+    "categoria": "terrorrrrr"
   }
 ]

@@ -78,6 +78,31 @@ export function editarJuego(juego) {
   });
 }
 
+//Actualizar Juego
+export function actualizarJuego(juego) {
+  return getAllJuegos().then(async juegos => {
+    console.log("juego actualizado parcialmente", juego)
+
+    const nuevoListado = juegos.map(j => {
+      if (j.id == juego.id) {
+        return {
+          id: j.id,
+          nombre: juego.nombre || j.nombre,
+          editorial: juego.editorial || j.editorial,
+          precio: juego.precio || j.precio,
+          year: juego.year || j.year,
+          categoria: juego.categoria || j.categoria
+        }
+      }
+      return j
+    });
+
+    await writeFile("./data/juegos.json", JSON.stringify(nuevoListado, null, 2));
+    return juego;
+  });
+}
+
+
 
 //Borrar Juego
 export function borrarJuego(id) {
