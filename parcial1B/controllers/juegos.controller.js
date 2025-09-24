@@ -3,16 +3,17 @@ import * as views from "../views/juegos.views.js";
 
 // Listar juegos (con filtros si vienen en query)
 export function getJuegos(req, res) {
-  // ✅ Nuevo: permitimos filtros desde query (nombre, categoria, editorial, precioMax)
+  // vamos a tener filtros desde query  para nombre, categoria, editorial y precioMax.
+  // filtros sanitizados
   const filtros = {
-    nombre: req.query.nombre,
-    categoria: req.query.categoria,
-    editorial: req.query.editorial,
-    precioMax: req.query.precioMax
+    nombre: req.query.nombre && req.query.nombre.trim() !== "" ? req.query.nombre : undefined,
+    categoria: req.query.categoria && req.query.categoria.trim() !== "" ? req.query.categoria : undefined,
+    editorial: req.query.editorial && req.query.editorial.trim() !== "" ? req.query.editorial : undefined,
+    precioMax: req.query.precioMax && req.query.precioMax !== "" ? Number(req.query.precioMax) : undefined
   };
 
   service.getJuegos(filtros).then((juegos) => {
-    res.send(views.createJuegosListPage(juegos));
+    res.send(views.createJuegosListPage(juegos, req.query));
   }).catch(err => {
     console.error("Error obteniendo juegos:", err);
     res.send(views.errorPage());

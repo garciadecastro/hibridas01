@@ -2,22 +2,71 @@ import { createPage } from "../utils/page.js";
 
 // 🔮 Menú de navegación con estilo medieval
 const navLinks = `
-  <li><a href="/" class="hover:text-yellow-400 font-bold tracking-wide">🏰 Inicio</a></li>
-  <li><a href="/juegos/nuevo" class="hover:text-yellow-400">⚔️ Nuevo juego</a></li>
-  <li><a href="/juegos" class="hover:text-yellow-400">📜 Catálogo completo</a></li>
+  <li><a href="/juegos"class="hover:text-yellow-400 font-bold tracking-wide">🏰 Inicio</a></li>
   <li><a href="/juegos?categoria=clásicos" class="hover:text-yellow-400">📖 Clásicos</a></li>
   <li><a href="/juegos?categoria=fantasía" class="hover:text-yellow-400">🧙 Fantasía</a></li>
   <li><a href="/juegos?categoria=terror" class="hover:text-yellow-400">👻 Terror</a></li>
   <li><a href="/juegos?categoria=ciencia-ficcion" class="hover:text-yellow-400">🚀 Ciencia Ficción</a></li>
   <li><a href="/juegos?categoria=historia-mitos" class="hover:text-yellow-400">⚖️ Historia y Mitos</a></li>
+  <li><a href="/juegos/nuevo" class="hover:text-yellow-400">⚔️ Nuevo juego</a></li>
 `;
 
-export function createJuegosListPage(juegos) {
+export function createJuegosListPage(juegos, query = {}) {
   let contenido = `
     <div class="bg-gradient-to-b from-gray-900 to-black text-gray-200 p-6 rounded-lg shadow-lg">
       <h1 class="text-3xl font-extrabold text-yellow-500 mb-6 font-serif">📜 Catálogo de Juegos</h1>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      
+      <!-- Formulario de búsqueda por nombre -->
+      <form method="get" action="/juegos" class="mb-4 flex space-x-2">
+        <input 
+          type="text" 
+          name="nombre" 
+          placeholder="Buscar por nombre..." 
+          value="${query?.nombre ?? ""}" 
+          class="flex-1 p-2 rounded bg-gray-800 border border-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        />
+        <button 
+          type="submit"
+          class="bg-yellow-600 text-black px-4 py-2 rounded hover:bg-yellow-500 font-bold"
+        >
+          Buscar por nombre
+        </button>
+      </form>
+
+      <!-- Formulario de búsqueda por precio -->
+      <form method="get" action="/juegos" class="mb-6 flex space-x-2">
+        <input
+          type="number"
+          name="precioMax"
+          placeholder="Precio máximo..."
+          value="${query?.precioMax ?? ""}"
+          class="w-32 p-2 rounded bg-gray-800 border border-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        />
+        <button 
+          type="submit"
+          class="bg-yellow-600 text-black px-4 py-2 rounded hover:bg-yellow-500 font-bold"
+        >
+          Buscar por precio
+        </button>
+      </form>
   `;
+
+  // Si no hay resultados
+  if (juegos.length === 0) {
+    contenido += `
+      <div class="text-center p-6 bg-red-900 border border-red-700 rounded-lg">
+        <h2 class="text-xl font-bold text-red-300">❌ No tenemos juegos que coincidan con tu búsqueda, lo siento amigo</h2>
+        <a href="/juegos" class="mt-4 inline-block bg-yellow-600 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 font-bold">
+          ↩️ Volver al catálogo completo
+        </a>
+      </div>
+    </div>`; 
+    return createPage("Sin resultados", navLinks, contenido);
+  }
+
+  // Si hay resultados
+  contenido += `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">`;
+
   juegos.forEach((juego) => {
     contenido += `
       <div class="p-4 border border-yellow-700 rounded-lg bg-gray-800 hover:bg-gray-700 transition flex flex-col items-center">
@@ -28,18 +77,17 @@ export function createJuegosListPage(juegos) {
         />
         <span class="font-bold text-lg text-yellow-400 font-serif text-center">${juego.nombre}</span>
         <div class="mt-3 flex space-x-4">
-          <a href="/juegos/${juego._id}" class="text-blue-400 hover:text-yellow-300">🔎 Ver</a>
-          <a href="/juegos/editar/${juego._id}" class="text-green-400 hover:text-yellow-300">✒️ Editar</a>
-          <a href="/juegos/borrar/${juego._id}" class="text-red-400 hover:text-yellow-300">🗡️ Borrar</a>
+          <a href="/juegos/${juego._id}" class="text-blue-400 hover:text-yellow-300">Ver</a>
+          <a href="/juegos/editar/${juego._id}" class="text-green-400 hover:text-yellow-300">Editar</a>
+          <a href="/juegos/borrar/${juego._id}" class="text-red-400 hover:text-yellow-300">Borrar</a>
         </div>
       </div>`;
   });
-  contenido += `
-      </div>
-    </div>
-  `;
+
+  contenido += `</div></div>`;
   return createPage("Catálogo de Juegos", navLinks, contenido);
 }
+
 
 export function createDetailPage(juego) {
   let contenido = `
@@ -58,8 +106,8 @@ export function createDetailPage(juego) {
       </ul>
       <div class="mt-6 flex justify-center space-x-6">
         <a href="/juegos" class="text-blue-400 hover:text-yellow-300">↩️ Catálogo</a>
-        <a href="/juegos/editar/${juego._id}" class="text-green-400 hover:text-yellow-300">✒️ Editar</a>
-        <a href="/juegos/borrar/${juego._id}" class="text-red-400 hover:text-yellow-300">🗡️ Borrar</a>
+        <a href="/juegos/editar/${juego._id}" class="text-green-400 hover:text-yellow-300">Editar</a>
+        <a href="/juegos/borrar/${juego._id}" class="text-red-400 hover:text-yellow-300">Borrar</a>
       </div>
     </div>
   `;
@@ -69,16 +117,30 @@ export function createDetailPage(juego) {
 export function formularioNuevoJuego() {
   const contenido = `
     <div class="bg-gray-900 text-gray-200 p-6 rounded-lg shadow-lg border border-yellow-700">
-      <h2 class="text-2xl font-extrabold text-yellow-500 mb-4 font-serif">⚔️ Añadir un nuevo juego</h2>
+      <h2 class="text-2xl font-extrabold text-yellow-500 mb-4 font-serif">Añadir un nuevo juego</h2>
       <form class="space-y-4" action="/juegos/nuevo" method="post">
         ${crearCampo("Nombre", "nombre", "HeroQuest")}
         ${crearCampo("Editorial", "editorial", "Games Workshop")}
         ${crearCampo("Año", "year", "1989", "number")}
-        ${crearCampo("Categoría", "categoria", "fantasía, clásicos...")}
+        <div>
+          <label class="block text-sm font-medium text-yellow-400">Categoría</label>
+            <select 
+              name="categoria"
+              class="w-full border border-yellow-700 bg-gray-800 text-gray-200 rounded p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              required
+            >
+              <option value="clásicos">Clásicos</option>
+              <option value="fantasía">Fantasía</option>
+              <option value="terror">Terror</option>
+              <option value="ciencia-ficcion">Ciencia Ficción</option>
+              <option value="historia-mitos">Historia y Mitos</option>
+            </select>
+        </div>
+
         ${crearCampo("Precio", "precio", "50000", "number")}
         ${crearCampo("Imagen (URL)", "imagen", "https://.../imagen.jpg", "url")}
         <button type="submit" class="bg-yellow-600 text-black px-6 py-2 rounded-lg hover:bg-yellow-500 font-bold">
-          Guardar ⚔️
+          Guardar
         </button>
       </form>
     </div>
@@ -86,7 +148,7 @@ export function formularioNuevoJuego() {
   return createPage("Nuevo juego", navLinks, contenido);
 }
 
-// ✅ Nuevo: formulario para editar juegos
+// Formulario para editar juegos
 export function formularioEditarJuego(juego){
   let html  = `
     <div class="bg-gray-900 text-gray-200 p-6 rounded-lg shadow-lg border border-yellow-700">
@@ -95,7 +157,21 @@ export function formularioEditarJuego(juego){
         ${crearCampoEditar("Nombre", "nombre", juego.nombre)}
         ${crearCampoEditar("Editorial", "editorial", juego.editorial)}
         ${crearCampoEditar("Año", "year", juego.year, "number")}
-        ${crearCampoEditar("Categoría", "categoria", juego.categoria)}
+        <div>
+          <label class="block text-sm font-medium text-yellow-400">Categoría</label>
+            <select 
+              name="categoria"
+              class="w-full border border-yellow-700 bg-gray-800 text-gray-200 rounded p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              required
+            >
+              <option value="clásicos" ${juego.categoria === "clásicos" ? "selected" : ""}>Clásicos</option>
+              <option value="fantasía" ${juego.categoria === "fantasía" ? "selected" : ""}>Fantasía</option>
+              <option value="terror" ${juego.categoria === "terror" ? "selected" : ""}>Terror</option>
+              <option value="ciencia-ficcion" ${juego.categoria === "ciencia-ficcion" ? "selected" : ""}>Ciencia Ficción</option>
+              <option value="historia-mitos" ${juego.categoria === "historia-mitos" ? "selected" : ""}>Historia y Mitos</option>
+            </select>
+      </div>
+
         ${crearCampoEditar("Precio", "precio", juego.precio, "number")}
         ${crearCampoEditar("Imagen (URL)", "imagen", juego.imagen || "", "url")}
         <button type='submit' class="bg-yellow-600 text-black px-6 py-2 rounded-lg hover:bg-yellow-500 font-bold">
@@ -103,7 +179,7 @@ export function formularioEditarJuego(juego){
         </button>
       </form>
       <div class="mt-4">
-        <a href="/" class="text-yellow-400 hover:text-white">↩️ Volver</a>
+        <a href="/juegos" class="text-yellow-400 hover:text-white">↩️ Volver</a>
       </div>
     </div>
   `;
@@ -146,8 +222,8 @@ function crearCampoEditar(label, name, value, type="text") {
 export function errorPage() {
   let contenido = `
     <div class="bg-red-900 text-red-200 p-6 rounded-lg shadow-lg border border-red-700">
-      <h2 class="text-2xl font-bold mb-4 font-serif">❌ No se encontró el juego buscado</h2>
-      <a href="/" class="text-yellow-400 hover:text-white">🏰 Volver al menú principal</a>
+      <h2 class="text-2xl font-bold mb-4 font-serif">❌ No se encontró el juego buscado o no se actualizó</h2>
+      <a href="/juegos" class="text-yellow-400 hover:text-white">Volver al menú principal</a>
     </div>
   `;
   return createPage("404", navLinks, contenido);
@@ -167,9 +243,9 @@ export function formularioBorrarJuego(juego) {
         </div>
         <div class="flex space-x-4">
           <button type='submit' class="bg-red-700 text-white px-6 py-2 rounded-lg hover:bg-red-600 font-bold">
-            Borrar 🗡️
+            Borrar
           </button>
-          <a href="/" class="text-yellow-400 hover:text-white">↩️ Volver</a>
+          <a href="/juegos" class="text-yellow-400 hover:text-white">↩️ Volver</a>
         </div>
       </form>
     </div>

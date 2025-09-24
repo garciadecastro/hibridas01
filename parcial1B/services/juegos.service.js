@@ -2,7 +2,7 @@ import { MongoClient, ObjectId } from "mongodb";
 
 // Conexión a Mongo Atlas
 const client = new MongoClient("mongodb+srv://admin:admin@hibridas.3sxrdj2.mongodb.net/");
-const db = client.db("DWT4AV");
+const db = client.db("AH20232CP1");
 
 // Obtener juegos con filtros dinámicos
 export async function getJuegos(filter = {}) {
@@ -44,6 +44,21 @@ export async function getJuegoById(id) {
 // Guardar un nuevo juego
 export async function guardarJuego(juego) {
   await client.connect();
+  // Convertimos precio a número antes de guardar
+  if (juego.precio !== undefined) {
+    juego.precio = Number(juego.precio);
+  }
+
+  // Convertimos los años a números y además miramos que no sea anterior a 1900 ni posterior al año actual
+  if (juego.year !== undefined) {
+    juego.year = Number(juego.year);
+
+    const currentYear = new Date().getFullYear();
+    if (isNaN(juego.year) || juego.year < 1900 || juego.year > currentYear) {
+      throw new Error(`El año debe ser entre 1900 y ${currentYear}`);
+    }
+  }
+
   const result = await db.collection("juegos").insertOne(juego);
   return { _id: result.insertedId, ...juego };
 }
@@ -52,6 +67,22 @@ export async function guardarJuego(juego) {
 export async function editarJuego(juego) {
   await client.connect();
   const { _id, ...campos } = juego;
+
+  // Convertimos precio a número antes de actualizar
+  if (campos.precio !== undefined) {
+    campos.precio = Number(campos.precio);
+  }
+
+  // Convertimos año a número y chequeamos que sea razonable
+  if (campos.year !== undefined) {
+    campos.year = Number(campos.year);
+
+    const currentYear = new Date().getFullYear();
+    if (isNaN(campos.year) || campos.year < 1900 || campos.year > currentYear) {
+      throw new Error(`El año debe ser entre 1900 y ${currentYear}`);
+    }
+  }
+
   await db.collection("juegos").updateOne(
     { _id: new ObjectId(_id) },
     { $set: campos }
@@ -63,6 +94,22 @@ export async function editarJuego(juego) {
 export async function actualizarJuego(juego) {
   await client.connect();
   const { _id, ...campos } = juego;
+
+  // Convertimos precio a número antes de actualizar
+  if (campos.precio !== undefined) {
+    campos.precio = Number(campos.precio);
+  }
+
+  // Convertimos año a número y chequeamos que sea razonable
+   if (campos.year !== undefined) {
+    campos.year = Number(campos.year);
+
+    const currentYear = new Date().getFullYear();
+    if (isNaN(campos.year) || campos.year < 1900 || campos.year > currentYear) {
+      throw new Error(`El año debe ser entre 1900 y ${currentYear}`);
+    }
+  }
+
   await db.collection("juegos").updateOne(
     { _id: new ObjectId(_id) },
     { $set: campos }
@@ -78,4 +125,3 @@ export async function borrarJuego(id) {
     { $set: { eliminado: true } }
   );
 }
-

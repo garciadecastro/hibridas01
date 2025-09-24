@@ -16,4 +16,3 @@ router.patch("/:id", controllers.actualizarJuego)
 
 export default router;
 
-//ACÁ VAN A IR TODAS NUESTRAS RUTAS
