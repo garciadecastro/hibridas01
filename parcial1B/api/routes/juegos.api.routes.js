@@ -12,7 +12,5 @@ router.patch("/:id", controllers.actualizarJuego)
 
 
 
-
-
 export default router;
 

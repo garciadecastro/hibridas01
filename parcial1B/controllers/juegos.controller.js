@@ -35,15 +35,6 @@ export function getJuegoById(req, res) {
   });
 }
 
-// ❌ Antiguo: función específica para categorías
-// export function getJuegosByCategoria(req, res) {
-//   const categoria = req.params.categoria;
-//   service.getJuegosBySection(categoria).then((juegos) => { ... });
-// }
-
-// ✅ Nuevo: ya no hace falta getJuegosByCategoria,
-//           porque ahora getJuegos() acepta filtros universales.
-
 // Mostrar formulario para nuevo juego
 export function formularioNuevoJuego(req, res) {
   res.send(views.formularioNuevoJuego());
@@ -79,7 +70,6 @@ export function formularioEditarJuego(req, res){
     });
 }
 
-// ✊ Editar un juego (versión socialista)
 export function editarJuego(req, res) {
   const id = req.params.id; // el id viene de la URL
 
@@ -91,13 +81,13 @@ export function editarJuego(req, res) {
     precio: req.body.precio,
     year: req.body.year,
     categoria: req.body.categoria,
-    imagen: req.body.imagen // 🚩 ahora sí guardamos la URL de la imagen
+    imagen: req.body.imagen
   };
 
   service.editarJuego(juego)
     .then(juegoEditado => res.send(views.createDetailPage(juegoEditado)))
     .catch(err => {
-      console.error("❌ Error editando juego:", err);
+      console.error("Error editando juego:", err);
       res.send(views.errorPage());
     });
 }
@@ -118,7 +108,7 @@ export function formularioBorrarJuego(req, res){
 export function borrarJuego(req, res){
   const id = req.params.id;
   service.borrarJuego(id)
-    .then(() => res.send( views.borrarExito(id) )) // ✅ Nuevo: confirmamos éxito sin depender de return del service
+    .then(() => res.send( views.borrarExito(id) ))
     .catch(err => {
       console.error("Error borrando juego:", err);
       res.send(views.errorPage());

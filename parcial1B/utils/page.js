@@ -1,4 +1,3 @@
-// Función genérica para armar páginas HTML// utils/page.js
 export function createPage(titulo, navLinks, contenido) {
   return `
     <!DOCTYPE html>
@@ -10,48 +9,55 @@ export function createPage(titulo, navLinks, contenido) {
       <!-- Tailwind CDN -->
       <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="bg-slate-50 text-slate-800">
+    <body class="bg-gradient-to-b from-gray-950 to-gray-900 text-gray-200 font-serif">
       
-      <!-- Navbar -->
-      <nav class="bg-white shadow">
-        <div class="max-w-6xl mx-auto px-4">
+      <!-- Navbar principal -->
+      <nav class="bg-gray-900 border-b border-yellow-700 shadow-lg">
+        <div class="max-w-6xl mx-auto px-6">
           <div class="flex justify-between items-center py-4">
-            
             <!-- Logo / Título -->
-           
-            <div class="text-xl font-bold text-blue-700">
-              ${titulo}
+            <div class="text-2xl font-extrabold text-yellow-500 tracking-wide uppercase">
+              Tienda de Juegos de Rol
             </div>
-
-            
-            <!-- Links -->
-            <div>
-              <ul class="flex space-x-6">
-                ${navLinks}
-              </ul>
-            </div>
+            <!-- Links principales -->
+            <ul class="flex space-x-6 text-lg font-bold">
+              <li><a href="/juegos" class="hover:text-yellow-400">Juegos</a></li>
+              <li><a href="/jugadores" class="hover:text-yellow-400">Jugadores</a></li>
+              <li><a href="/jugadores/nuevo" class="hover:text-yellow-400">Nuevo Jugador</a></li>
+            </ul>
           </div>
         </div>
       </nav>
 
+      <!-- Menú secundario de categorías -->
+      <div class="bg-gray-800 border-b border-yellow-700 shadow-inner">
+        <div class="max-w-6xl mx-auto px-6 py-2">
+          <ul class="flex flex-wrap gap-4 text-sm font-semibold text-gray-300">
+            <li><a href="/juegos?categoria=clásicos" class="hover:text-yellow-400">Clásicos</a></li>
+            <li><a href="/juegos?categoria=fantasía" class="hover:text-yellow-400">Fantasía</a></li>
+            <li><a href="/juegos?categoria=terror" class="hover:text-yellow-400">Terror</a></li>
+            <li><a href="/juegos?categoria=ciencia-ficcion" class="hover:text-yellow-400">Ciencia Ficción</a></li>
+            <li><a href="/juegos?categoria=historia-mitos" class="hover:text-yellow-400">Historia y Mitos</a></li>
+          </ul>
+        </div>
+      </div>
+
       <!-- Contenido principal -->
-      <main class="max-w-6xl mx-auto px-4 py-6">
+      <main class="max-w-6xl mx-auto px-6 py-8">
         ${contenido}
       </main>
 
-     
-      <footer class="bg-gray-800 text-gray-200 py-6 mt-6">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-          <p class="text-sm">&copy; 2025 Tienda de Juegos de Rol. Todos los derechos reservados.</p>
+      <!-- Footer -->
+      <footer class="bg-gray-950 border-t border-yellow-700 text-gray-400 py-6 mt-10">
+        <div class="max-w-6xl mx-auto px-6 text-center text-sm">
+          <p>&copy; 2025 Carlos García de Castro - Parcial 1 de Aplicaciones Híbridas - Escuela Da Vinci</p>
           <p class="mt-2">
-            <a href="/" class="text-blue-400 hover:underline">Inicio</a> | 
-            <a href="/juegos" class="text-blue-400 hover:underline">Catálogo</a> | 
-            <a href="/juegos/nuevo" class="text-blue-400 hover:underline">Añadir juego</a>
+            <a href="https://github.com/garciadecastro" target="_blank" class="text-blue-400 hover:underline">
+              GitHub: garciadecastro
+            </a>
           </p>
         </div>
       </footer>
-      
-
     </body>
     </html>
   `;
